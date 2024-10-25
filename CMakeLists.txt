@@ -9,7 +9,12 @@ endif(COMMAND cmake_policy)
 find_package(Threads REQUIRED)
 find_package(GTest REQUIRED)
 
+find_package(BLAS REQUIRED)
+find_package(LAPACK REQUIRED)
+list(APPEND math_libs ${OpenBLAS_LIBRARIES} ${LAPACK_LIBRARIES})
+
 if(BUILD_TESTING)
+    enable_testing()
     function(AddTest) # function for UT
         cmake_parse_arguments(UT "DYN" "TARGET"
                             "LIBS;DYN_LIBS;STATIC_LIBS;SOURCES;DEPENDS" ${ARGN})
