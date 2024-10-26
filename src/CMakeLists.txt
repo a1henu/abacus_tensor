@@ -1,0 +1,2 @@
+include_directories(module_container)
+add_subdirectory(module_container)

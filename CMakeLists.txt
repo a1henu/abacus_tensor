@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.22)
-project(ABACUS_Tensor CXX)
+
+project(
+  ${SKBUILD_PROJECT_NAME}
+  VERSION ${SKBUILD_PROJECT_VERSION}
+  LANGUAGES CXX
+)
 
 if(COMMAND cmake_policy)
     cmake_policy(SET CMP0003 NEW)
@@ -7,13 +12,18 @@ if(COMMAND cmake_policy)
 endif(COMMAND cmake_policy)
 
 find_package(Threads REQUIRED)
-find_package(GTest REQUIRED)
 
 find_package(BLAS REQUIRED)
 find_package(LAPACK REQUIRED)
 list(APPEND math_libs ${OpenBLAS_LIBRARIES} ${LAPACK_LIBRARIES})
 
 if(BUILD_TESTING)
+    find_package(GTest REQUIRED)
+    if(GTest_FOUND)
+        message(STATUS "GTest found")
+    else()
+        message(FATAL_ERROR "GTest not found")
+    endif()
     enable_testing()
     function(AddTest) # function for UT
         cmake_parse_arguments(UT "DYN" "TARGET"
@@ -43,6 +53,5 @@ if(BUILD_TESTING)
     endfunction(AddTest)
 endif()
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/module_container)
-add_subdirectory(module_container)
+include_directories(src)
+add_subdirectory(src)
