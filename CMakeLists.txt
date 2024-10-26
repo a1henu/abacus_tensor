@@ -11,6 +11,12 @@ if(COMMAND cmake_policy)
     cmake_policy(SET CMP0012 NEW)
 endif(COMMAND cmake_policy)
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+
 find_package(Threads REQUIRED)
 
 find_package(BLAS REQUIRED)
