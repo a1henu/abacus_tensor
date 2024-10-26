@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import List
 
-from ._libshape import Shape as _Shape
+from ._libtensor import Shape as _Shape
 
 class Shape(_Shape):
     def  __init__(self, *args, **kwargs) -> None:

@@ -36,7 +36,3 @@ void bind_shape(py::module& m) {
                  return oss.str();
              });
 }
-
-PYBIND11_MODULE(_libshape, m) {
-    bind_shape(m);
-}
